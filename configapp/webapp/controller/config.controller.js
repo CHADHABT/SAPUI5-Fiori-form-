@@ -34,7 +34,7 @@ sap.ui.define([
                 MessageToast.show("Logo pressed!");
             },
 
-            _handleMediaChange: function () {
+/*             _handleMediaChange: function () {
                 var rangeName = Device.media.getCurrentRange("StdExt").name;
 
                 switch (rangeName) {
@@ -55,11 +55,11 @@ sap.ui.define([
                     default:
                         break;
                 }
-            },
+            }, */
 
             onInit: function () {
-                Device.media.attachHandler(this._handleMediaChange, this);
-                this._handleMediaChange();
+                /* Device.media.attachHandler(this._handleMediaChange, this);
+                this._handleMediaChange(); */
 
                 var oModel = new JSONModel(sap.ui.require.toUrl("sap/ui/demo/mock/products.json"));
                 this.getView().setModel(oModel);
@@ -123,7 +123,25 @@ sap.ui.define([
                     oInput1.setVisible(true);
                 }
             },
+
+            onSegmentedButtonPress2: function (oEvent) {
+                var sSelectedKey2 = oEvent.getParameter("id");
+                var oView = this.getView();
+                console.log(sSelectedKey2);
             
+                // Get references to your input fields
+                var oInput1 = oView.byId("Date1"); // Date and Time
+                var oInput2 = oView.byId("Date2"); // DateTime
+            
+                // Show the input based on the selected key
+                if (sSelectedKey2 === "__xmlview0--option_2") {
+                    oInput2.setVisible(false);
+                    oInput1.setVisible(true);
+                } else if (sSelectedKey2 === "__xmlview0--option_1") {
+                    oInput1.setVisible(false);
+                    oInput2.setVisible(true);
+                }
+            },
 
             handleUploadComplete: function(oEvent) {
                 var sResponse = oEvent.getParameter("response"),

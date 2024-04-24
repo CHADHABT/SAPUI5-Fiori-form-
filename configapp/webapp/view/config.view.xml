@@ -11,16 +11,16 @@
     xmlns:f="sap.ui.layout.form"
     xmlns:core="sap.ui.core"
 >
-    <Page
+<!--     <Page
         id="page"
         title="{i18n>title}"
     >
         <content />
-    </Page>
+    </Page> -->
 <!--     <ScrollContainer
         vertical="true"
-        height="100%"
-    > -->
+        height="700x"
+    >  -->
         <tnt:ToolHeader
             id="shellLikeToolHeader"
             class="sapUiTinyMargin"
@@ -129,12 +129,12 @@
         </tnt:ToolHeader>
     
     <!--    Page after header     -->
-
-    <VBox class="sapUiSmallMargin">
-        <ScrollContainer
+    <ScrollContainer
         vertical="true"
-        height="100%"
+        height="580px"
     >
+    <VBox class="sapUiSmallMargin">
+    
         <f:Form
             id="Application"
             editable="true"
@@ -363,7 +363,7 @@
                         >
                             <f:fields>
                                 <Input
-                                    value="Address"
+                            
                                     id="adress"
                                     placeholder="Address"
                                 />
@@ -376,7 +376,7 @@
                         >
                             <f:fields>
                                 <Input
-                                    value="Country"
+                                placeholder="country"
                                     id="country"
                                 />
                             </f:fields>
@@ -388,12 +388,12 @@
                         >
                             <f:fields>
                                 <Input
-                                    value="country_code"
+                                placeholder="country code"
                                     id="country_code"
                                 />
                                 <Input
-                                    value="Zip code"
                                     id="zip"
+                                    placeholder="Zip code"
                                 />
                             </f:fields>
                         </f:FormElement>
@@ -402,22 +402,61 @@
                     </f:FormElement>
                     <f:FormElement>
                          <Title text="More" level="H6" />
+                         
                     </f:FormElement>
                         <f:FormElement
-                            id="more"
-                            label="MORE"
+                            id="creation_Date"
+                            label="Creation Date"
                         >
                         
                             <f:fields>
                             
+                            <SegmentedButton
+                                    selectedKey="DateTime"
+                                    class="sapUiSmallMarginBottom2"
+                                >
+                                    <items>
+                                        <SegmentedButtonItem
+                                            text="DateTime"
+                                            key="DateTime"
+                                            id="option_1"
+                                            width="150px"
+                                            press="onSegmentedButtonPress2"
+                                        />
+                                        <SegmentedButtonItem
+                                            text="Date And Time"
+                                            key="DateAndTime"
+                                            id="option_2"
+                                            width="150px"
+                                            press="onSegmentedButtonPress2"
+                                        />
+                                    </items>
+                                </SegmentedButton>
+                                </f:fields>
+                                </f:FormElement>
+
+                            <f:FormElement
+                                id="Date1"
+                                label="Date And Time"
+                                visible="false"
+                            >
                                 <Input
-                                    value="Address"
-                                    id="adresdss"
-                                    placeholder="Address"
+                                                                        placeholder="Date"
+                                /><Input
+                                    
+                                    placeholder="time"
                                 />
-                            </f:fields>
-                        </f:FormElement>
-                        
+                                 </f:FormElement>
+                            <f:FormElement
+                                id="Date2"
+                                label="DateTime"
+                                visible="true"
+                            >
+                                <Input
+                                    
+                                    placeholder="Enter your DateTime attribute"
+                                />
+                                 </f:FormElement>
                     </f:formElements>
                 </f:FormContainer>
             </f:formContainers>
@@ -515,9 +554,31 @@
                 </f:FormContainer>
             </f:formContainers>
         </f:Form>
-</ScrollContainer>
-    </VBox>
+        
 
+
+</VBox>
+
+</ScrollContainer>
+
+<Page >
+        <footer>
+            <Toolbar>
+                <ToolbarSpacer />
+                <Button
+                    type="Emphasized"
+                    text="Next"
+                    width="100px"
+                    press="SubmitButton"
+                />
+                <Button
+                    text="Cancel"
+                    press="onPress1"
+                    width="100px"
+                />
+            </Toolbar>
+        </footer>
+</Page>
     <!-- 
 <l:HorizontalLayout class="sapUiContentPadding">
         <unified:FileUploader 
