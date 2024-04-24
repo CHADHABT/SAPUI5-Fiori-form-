@@ -1,0 +1,208 @@
+view : <mvc:View
+    controllerName="configapp.controller.config"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:tnt="sap.tnt"
+    xmlns:fiori="sap.ui.webc.fiori"
+    xmlns:upload="sap.m.upload"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:l="sap.ui.layout"
+    xmlns:unified="sap.ui.unified"
+>
+    <Page
+        id="page"
+        title="{i18n>title}"
+    >
+    
+        <content />
+    </Page>
+    <ScrollContainer
+        vertical="true"
+        height="100%"
+        
+    >
+        <tnt:ToolHeader
+            id="shellLikeToolHeader"
+            class="sapUiTinyMargin"
+        >
+            <Button
+                icon="sap-icon://menu2"
+                type="Transparent"
+                tooltip="Menu"
+            >
+                <layoutData>
+                    <OverflowToolbarLayoutData priority="NeverOverflow" />
+                </layoutData>
+            </Button>
+            <Image
+                src="/test/images/SAP.jpg"
+                decorative="false"
+                press="onLogoPressed"
+                tooltip="SAP Logo"
+            >
+                <layoutData>
+                    <OverflowToolbarLayoutData priority="NeverOverflow" />
+                </layoutData>
+            </Image>
+            <Title
+                text="Configuration"
+                wrapping="false"
+                id="productName"
+            >
+                <layoutData>
+                    <OverflowToolbarLayoutData priority="Disappear" />
+                </layoutData>
+            </Title>
+            <!-- <Text
+                text="App"
+                wrapping="false"
+                id="secondTitle"
+                
+            >
+                <layoutData>
+                    <OverflowToolbarLayoutData priority="Disappear" />
+                </layoutData>
+            </Text> -->
+            
+            <ToolbarSpacer id="spacer">
+                <layoutData>
+                    <OverflowToolbarLayoutData
+                        priority="Low"
+                        group="1"
+                    />
+                </layoutData>
+            </ToolbarSpacer>
+<!-- 
+            <OverflowToolbarButton
+                icon="sap-icon://source-code"
+                type="Transparent"
+                tooltip="Action 1"
+                text="Action 1"
+            >
+                <layoutData>
+                    <OverflowToolbarLayoutData group="2" />
+                </layoutData>
+            </OverflowToolbarButton> -->
+
+<!--             <OverflowToolbarButton
+                icon="sap-icon://card"
+                type="Transparent"
+                tooltip="Action 2"
+                text="Action 2"
+            >
+                <layoutData>
+                    <OverflowToolbarLayoutData group="2" />
+                </layoutData>
+            </OverflowToolbarButton> -->
+            
+            <ToolbarSeparator>
+                <layoutData>
+                    <OverflowToolbarLayoutData group="2" />
+                </layoutData>
+            </ToolbarSeparator>
+            <OverflowToolbarButton
+                icon="sap-icon://action-settings"
+                type="Transparent"
+                text="Settings"
+            />
+            <Button
+                icon="sap-icon://bell"
+                type="Transparent"
+                tooltip="Notification"
+            >
+                <layoutData>
+                    <OverflowToolbarLayoutData priority="NeverOverflow" />
+                </layoutData>
+            </Button>
+            <tnt:ToolHeaderUtilitySeparator />
+            <ToolbarSpacer width="1.125rem" />
+            <Avatar
+                src="/test/images/user.png"
+                displaySize="XS"
+                press=".onAvatarPressed"
+                tooltip="Profile"
+            >
+                <layoutData>
+                    <OverflowToolbarLayoutData priority="NeverOverflow" />
+                </layoutData>
+            </Avatar>
+        </tnt:ToolHeader>
+
+        <unified:FileUploader
+        placeholder="Upload an existing json File"
+        width="300px"
+        change="handleChange"
+    />
+
+    </ScrollContainer>
+
+
+
+
+</mvc:View>
+_______________________________________________________________________________________________
+controller : sap.ui.define([
+    "sap/ui/core/mvc/Controller",
+    'sap/m/MessageToast',
+    'sap/ui/Device',
+    "sap/ui/model/json/JSONModel",
+	"sap/ui/webc/main/Toast"
+],
+    /**
+     * @param {typeof sap.ui.core.mvc.Controller} Controller
+     */
+    function (Controller, MessageToast, Device,JSONModel, Toast) {
+        "use strict";
+
+        return Controller.extend("configapp.controller.config", {
+            //onInit: function () {
+
+            //},
+            onAvatarPressed: function () {
+                MessageToast.show("Avatar pressed!");
+            },
+
+            onLogoPressed: function () {
+                MessageToast.show("Logo pressed!");
+            },
+
+            _handleMediaChange: function () {
+                var rangeName = Device.media.getCurrentRange("StdExt").name;
+
+                switch (rangeName) {
+                    // Shell Desktop
+                    case "LargeDesktop":
+                        this.byId("productName").setVisible(true);
+                        this.byId("spacer").setVisible(true);
+                        MessageToast.show("Screen width is corresponding to Large Desktop");
+                        break;
+
+                    // Tablet - Landscape
+                    case "Desktop":
+                        this.byId("productName").setVisible(true);
+                        this.byId("spacer").setVisible(true);
+                        MessageToast.show("Screen width is corresponding to Desktop");
+                        break;
+
+                    default:
+                        break;
+                }
+            },
+
+            onInit: function () {
+                Device.media.attachHandler(this._handleMediaChange, this);
+                this._handleMediaChange();
+
+                var oModel = new JSONModel(sap.ui.require.toUrl("sap/ui/demo/mock/products.json"));
+                this.getView().setModel(oModel);
+
+            },
+
+            onExit: function () {
+                Device.media.detachHandler(this._handleMediaChange, this);
+            },
+
+
+
+        });
+    });

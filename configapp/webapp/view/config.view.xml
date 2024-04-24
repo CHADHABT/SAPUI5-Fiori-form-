@@ -1,0 +1,542 @@
+<mvc:View
+    controllerName="configapp.controller.config"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:tnt="sap.tnt"
+    xmlns:fiori="sap.ui.webc.fiori"
+    xmlns:upload="sap.m.upload"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:l="sap.ui.layout"
+    xmlns:unified="sap.ui.unified"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+>
+    <Page
+        id="page"
+        title="{i18n>title}"
+    >
+        <content />
+    </Page>
+<!--     <ScrollContainer
+        vertical="true"
+        height="100%"
+    > -->
+        <tnt:ToolHeader
+            id="shellLikeToolHeader"
+            class="sapUiTinyMargin"
+        >
+            <Button
+                icon="sap-icon://menu2"
+                type="Transparent"
+                tooltip="Menu"
+            >
+                <layoutData>
+                    <OverflowToolbarLayoutData priority="NeverOverflow" />
+                </layoutData>
+            </Button>
+            <Image
+                src="/test/images/SAP.jpg"
+                decorative="false"
+                press="onLogoPressed"
+                tooltip="SAP Logo"
+            >
+                <layoutData>
+                    <OverflowToolbarLayoutData priority="NeverOverflow" />
+                </layoutData>
+            </Image>
+            <Title
+                text="Configuration"
+                wrapping="false"
+                id="configuration"
+            >
+                <layoutData>
+                    <OverflowToolbarLayoutData priority="Disappear" />
+                </layoutData>
+            </Title>
+            <!-- <Text
+                text="App"
+                wrapping="false"
+                id="secondTitle"
+                
+            >
+                <layoutData>
+                    <OverflowToolbarLayoutData priority="Disappear" />
+                </layoutData>
+            </Text> -->
+
+            <ToolbarSpacer id="spacer">
+                <layoutData>
+                    <OverflowToolbarLayoutData
+                        priority="Low"
+                        group="1"
+                    />
+                </layoutData>
+            </ToolbarSpacer>
+            <!-- 
+            <OverflowToolbarButton
+                icon="sap-icon://source-code"
+                type="Transparent"
+                tooltip="Action 1"
+                text="Action 1"
+            >
+                <layoutData>
+                    <OverflowToolbarLayoutData group="2" />
+                </layoutData>
+            </OverflowToolbarButton> -->
+
+            <!--             <OverflowToolbarButton
+                icon="sap-icon://card"
+                type="Transparent"
+                tooltip="Action 2"
+                text="Action 2"
+            >
+                <layoutData>
+                    <OverflowToolbarLayoutData group="2" />
+                </layoutData>
+            </OverflowToolbarButton> -->
+
+            <ToolbarSeparator>
+                <layoutData>
+                    <OverflowToolbarLayoutData group="2" />
+                </layoutData>
+            </ToolbarSeparator>
+            <OverflowToolbarButton
+                icon="sap-icon://action-settings"
+                type="Transparent"
+                text="Settings"
+            />
+            <Button
+                icon="sap-icon://bell"
+                type="Transparent"
+                tooltip="Notification"
+            >
+                <layoutData>
+                    <OverflowToolbarLayoutData priority="NeverOverflow" />
+                </layoutData>
+            </Button>
+            <tnt:ToolHeaderUtilitySeparator />
+            <ToolbarSpacer width="1.125rem" />
+            <Avatar
+                src="/test/images/user.png"
+                displaySize="XS"
+                press=".onAvatarPressed"
+                tooltip="Profile"
+            >
+                <layoutData>
+                    <OverflowToolbarLayoutData priority="NeverOverflow" />
+                </layoutData>
+            </Avatar>
+        </tnt:ToolHeader>
+    
+    <!--    Page after header     -->
+
+    <VBox class="sapUiSmallMargin">
+        <ScrollContainer
+        vertical="true"
+        height="100%"
+    >
+        <f:Form
+            id="Application"
+            editable="true"
+        >
+            <f:title>
+                <core:Title text="Application Configuration" />
+            </f:title>
+            <f:layout>
+                <f:ResponsiveGridLayout
+                    labelSpanXL="4"
+                    labelSpanL="4"
+                    labelSpanM="12"
+                    labelSpanS="12"
+                    adjustLabelSpan="false"
+                    emptySpanXL="0"
+                    emptySpanL="0"
+                    emptySpanM="0"
+                    emptySpanS="0"
+                    columnsXL="2"
+                    columnsL="2"
+                    columnsM="1"
+                    singleContainerFullSize="false"
+                />
+            </f:layout>
+            <f:formContainers>
+                <f:FormContainer>
+                    <f:formElements>
+                        <f:FormElement label="Configuration Name">
+                            <f:fields>
+                                <Input
+                                    value="{SupplierName}"
+                                    id="configname"
+                                    placeholder="Configuration Name"
+                                    required="true"
+                                />
+                            </f:fields>
+                        </f:FormElement>
+                    </f:formElements>
+                </f:FormContainer>
+                <f:FormContainer>
+                    <f:formElements>
+                        <f:FormElement label="App Name">
+                            <f:fields>
+                                <Input
+                                    value="{SupplierName}"
+                                    id="appname"
+                                    placeholder="Enter XML Path to your Application Name"
+                                    required="true"
+                                />
+                            </f:fields>
+                        </f:FormElement>
+                    </f:formElements>
+                </f:FormContainer>
+            </f:formContainers>
+        </f:Form>
+
+        <f:Form
+            id="customer"
+            editable="true"
+        >
+            <f:title>
+                <core:Title text="Customer Fields" />
+            </f:title>
+            <f:layout>
+                <f:ResponsiveGridLayout
+                    columnsXL="2"
+                    columnsL="2"
+                    columnsM="2"
+                    singleContainerFullSize="false"
+                />
+            </f:layout>
+            <f:formContainers>
+                <f:FormContainer title="Customer Data">
+                    <f:formElements>
+                        <f:FormElement label="Name">
+                            <f:fields>
+                                <SegmentedButton
+                                    selectedKey="Full Name"
+                                    class="sapUiSmallMarginBottom"
+                                >
+                                    <items>
+                                        <SegmentedButtonItem
+                                            text="Full Name"
+                                            key="Full Name"
+                                            id="option1"
+                                            width="130px"
+                                            press="onSegmentedButtonPress"
+                                        />
+                                        <SegmentedButtonItem
+                                            text="Double Name"
+                                            key="Double Name"
+                                            id="option2"
+                                            width="130px"
+                                            press="onSegmentedButtonPress"
+                                        />
+                                        <SegmentedButtonItem
+                                            text="Triple Name"
+                                            key="Triple Name"
+                                            id="option3"
+                                            width="130px"
+                                            press="onSegmentedButtonPress"
+                                        />
+                                    </items>
+                                </SegmentedButton>
+                            </f:fields>
+                        </f:FormElement>
+                        <f:FormElement
+                            id="name1"
+                            label="Full Name"
+                        >
+                            <f:fields>
+                                <Input
+                                    value="{Full Name}"
+                                    id="1"
+                                    placeholder="Full Name"
+                                />
+                            </f:fields>
+                        </f:FormElement>
+                        <f:FormElement
+                            label="First Name"
+                            id="name2"
+                            visible="false"
+                        >
+                            <f:fields>
+                                <Input
+                                    value="{First Name}"
+                                    id="2"
+                                    placeholder="First Name"
+                                />
+                            </f:fields>
+                        </f:FormElement>
+                        <f:FormElement
+                            label="Middle Name"
+                            visible="false"
+                            id="name3"
+                        >
+                            <f:fields>
+                                <Input
+                                    value="{Middle Name}"
+                                    id="3"
+                                    placeholder="Middle Name"
+                                />
+                            </f:fields>
+                        </f:FormElement>
+
+                        <f:FormElement
+                            label="Last Name"
+                            visible="false"
+                            id="name4"
+                        >
+                            <f:fields>
+                                <Input
+                                    value="{Last Name}"
+                                    id="4"
+                                    placeholder="Last Name "
+                                />
+                            </f:fields>
+                        </f:FormElement>
+                        <f:FormElement label="Email">
+                            <f:fields>
+                                <Input
+                                    value="{Email}"
+                                    id="5"
+                                    placeholder="Email"
+                                />
+                            </f:fields>
+                        </f:FormElement>
+                        <f:FormElement label="Phone Number">
+                            <f:fields>
+                                <Select
+                                    id="Phone"
+                                    selectedKey="Phone1"
+                                    change="onPhoneSelectChange"
+                                >
+                                    <items>
+                                        <core:Item
+                                            text="One Phone Number"
+                                            key="Phone1"
+                                            id="select1"
+                                        />
+                                        <core:Item
+                                            text="Two Phone Numbers"
+                                            key="Phone2"
+                                            id="select2"
+                                        />
+                                    </items>
+                                </Select>
+                            </f:fields>
+                        </f:FormElement>
+
+                        <f:FormElement
+                            label="Phone 1"
+                            visible="true"
+                            id="phone1"
+                        >
+                            <f:fields>
+                                <Input
+                                    value="{Phone1}"
+                                    id="ph1"
+                                    placeholder="Enter Phone 1 attribute Name"
+                                />
+                            </f:fields>
+                        </f:FormElement>
+                        <f:FormElement
+                            label="Phone 2"
+                            visible="false"
+                            id="phone2"
+                        >
+                            <f:fields>
+                                <Input
+                                    value="{Phone 2}"
+                                    id="ph2"
+                                    placeholder="Enter Phone 2 attribute Name"
+                                />
+                            </f:fields>
+                        </f:FormElement>
+                    </f:formElements>
+                </f:FormContainer>
+            </f:formContainers>
+            <f:formContainers>
+                <f:FormContainer title="Address">
+                    <f:formElements>
+                        <f:FormElement
+                            id="addressfield"
+                            label="Address"
+                        >
+                            <f:fields>
+                                <Input
+                                    value="Address"
+                                    id="adress"
+                                    placeholder="Address"
+                                />
+                            </f:fields>
+                        </f:FormElement>
+                        <f:FormElement
+                            label="Country"
+                            id="Country"
+                            visible="true"
+                        >
+                            <f:fields>
+                                <Input
+                                    value="Country"
+                                    id="country"
+                                />
+                            </f:fields>
+                        </f:FormElement>
+                        <f:FormElement
+                            label="Country / Zip Code"
+                            visible="true"
+                            id="countrycode"
+                        >
+                            <f:fields>
+                                <Input
+                                    value="country_code"
+                                    id="country_code"
+                                />
+                                <Input
+                                    value="Zip code"
+                                    id="zip"
+                                />
+                            </f:fields>
+                        </f:FormElement>
+                        <f:FormElement>
+                         <Title text="   " level="H4" />
+                    </f:FormElement>
+                    <f:FormElement>
+                         <Title text="More" level="H6" />
+                    </f:FormElement>
+                        <f:FormElement
+                            id="more"
+                            label="MORE"
+                        >
+                        
+                            <f:fields>
+                            
+                                <Input
+                                    value="Address"
+                                    id="adresdss"
+                                    placeholder="Address"
+                                />
+                            </f:fields>
+                        </f:FormElement>
+                        
+                    </f:formElements>
+                </f:FormContainer>
+            </f:formContainers>
+        </f:Form>
+        <f:Form
+            id="URL"
+            editable="true"
+        >
+            <f:title>
+                <core:Title text="Customer URL" />
+            </f:title>
+            <f:layout>
+                <f:ResponsiveGridLayout
+                    labelSpanXL="4"
+                    labelSpanL="4"
+                    labelSpanM="12"
+                    labelSpanS="12"
+                    adjustLabelSpan="false"
+                    emptySpanXL="0"
+                    emptySpanL="0"
+                    emptySpanM="0"
+                    emptySpanS="0"
+                    columnsXL="2"
+                    columnsL="2"
+                    columnsM="1"
+                    singleContainerFullSize="false"
+                />
+            </f:layout>
+            <f:formContainers>
+                <f:FormContainer title="URL">
+                    <f:formElements>
+                        <f:FormElement label="Customer URL">
+                            <f:fields>
+                                <Input
+                                    id="appurl"
+                                    type="Url"
+                                    placeholder="Enter Customer URL"
+                                    required="true"
+                                />
+                            </f:fields>
+                        </f:FormElement>
+                    </f:formElements>
+                </f:FormContainer>
+            </f:formContainers>
+        </f:Form>
+
+        <f:Form
+            id="uploadfile"
+            editable="true"
+        >
+            <f:title>
+                <core:Title text="Upload cusomer configuration file" />
+            </f:title>
+            <f:layout>
+                <f:ResponsiveGridLayout
+                    labelSpanXL="4"
+                    labelSpanL="4"
+                    labelSpanM="12"
+                    labelSpanS="12"
+                    adjustLabelSpan="false"
+                    emptySpanXL="0"
+                    emptySpanL="0"
+                    emptySpanM="0"
+                    emptySpanS="0"
+                    columnsXL="2"
+                    columnsL="2"
+                    columnsM="1"
+                    singleContainerFullSize="false"
+                />
+            </f:layout>
+            <f:formContainers>
+                <f:FormContainer title="Upload File">
+                    <f:formElements>
+                        <f:FormElement label="Customer URL">
+                            <f:fields>
+                                <unified:FileUploader
+                                    id="fileUploader"
+                                    name="myFileUpload"
+                                    uploadUrl="https://848efe0ctrial-trial.integrationsuitetrial-apim.us10.hana.ondemand.com/848efe0ctrial/configapp"
+                                    placeholder="Upload file..."
+                                    uploadComplete="handleUploadComplete"
+                                    tooltip="Upload your file to the local server"
+                                    style="Emphasized"
+                                    typeMissmatch="handleTypeMissmatch"
+                                    fileType="json,js"
+                                    change="handleValueChange"
+                                />
+                                <Button
+                                    text="Upload File"
+                                    press="handleUploadPress"
+                                />
+                            </f:fields>
+                        </f:FormElement>
+                    </f:formElements>
+                </f:FormContainer>
+            </f:formContainers>
+        </f:Form>
+</ScrollContainer>
+    </VBox>
+
+    <!-- 
+<l:HorizontalLayout class="sapUiContentPadding">
+        <unified:FileUploader 
+            id="fileUploader" 
+            name="myFileUpload"
+			uploadUrl="https://848efe0ctrial-trial.integrationsuitetrial-apim.us10.hana.ondemand.com/848efe0ctrial/configapp" 
+            placeholder="Upload file..."
+            uploadComplete="handleUploadComplete" 
+            tooltip="Upload your file to the local server"
+            style="Emphasized"
+            typeMissmatch="handleTypeMissmatch"
+            fileType="json,js"
+            change="handleValueChange"
+            >
+            
+        </unified:FileUploader>
+        <Button
+			text="Upload File"
+			press="handleUploadPress"/>
+</l:HorizontalLayout> -->
+<!-- </ScrollContainer> -->
+</mvc:View>
