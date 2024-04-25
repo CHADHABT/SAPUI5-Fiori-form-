@@ -4,11 +4,11 @@
     xmlns="sap.f">
 
 
-   
+   <!-- 
       <FlexibleColumnLayout id="app" backgroundDesign="Solid">
      <beginColumnPages>
 			<mvc:XMLView id="beginView" viewName="configapp.view.config"/>
 		</beginColumnPages>
         
-        </FlexibleColumnLayout>
+        </FlexibleColumnLayout> -->
 </mvc:View>
